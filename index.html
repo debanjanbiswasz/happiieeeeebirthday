@@ -1,624 +1,773 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday ❤️</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday ❤️</title>
 
-<!-- Bootstrap -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel+Decorative:wght@700&display=swap"
+    rel="stylesheet">
 
 
 
-<style>
-/* ================= BASE ================= */
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: 'Segoe UI', sans-serif;
-  background: radial-gradient(circle at top, #ffd6e8, #f78fb3, #e84393);
-  color: #fff;
-  overflow: hidden;
+  <style>
+    /* ================= BASE ================= */
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at top, #ffd6e8, #f78fb3, #e84393);
+      color: #fff;
+      overflow: hidden;
+    }
+
+    /* ================= STARS BACKGROUND ================= */
+    .stars,
+    .stars::after {
+      position: fixed;
+      inset: 0;
+      background: transparent;
+      z-index: -1;
+    }
+
+    .stars::after {
+      content: "";
+      background-image: radial-gradient(2px 2px at 20% 30%, #fff, transparent),
+        radial-gradient(1px 1px at 80% 60%, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 50% 80%, #fff, transparent),
+        radial-gradient(1px 1px at 10% 90%, #fff, transparent);
+      animation: starsMove 60s linear infinite;
+    }
+
+    @keyframes starsMove {
+      from {
+        transform: translateY(0);
+      }
+
+      to {
+        transform: translateY(-2000px);
+      }
+    }
+
+    /* ================= STORY WRAPPER ================= */
+    .story-wrapper {
+      height: calc(100vh - 28px);
+      width: calc(100vw - 28px);
+      margin: 14px auto;
+      border-radius: 26px;
+      overflow: hidden;
+    }
+
+    /* ================= SLIDES ================= */
+    .slide {
+      height: 100vh;
+      width: 100vw;
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      background-size: cover;
+      background-position: center;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* ================= TEXT ================= */
+    .neon {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 3.1rem;
+      color: #fff;
+      letter-spacing: 4px;
+
+      text-shadow:
+        0 0 10px rgba(255, 255, 255, 0.8),
+        0 0 25px rgba(255, 192, 203, 0.9),
+        0 0 45px rgba(232, 67, 147, 1);
+    }
+
+
+    .sub {
+      font-size: 1.4rem;
+      margin-top: 10px;
+      color: #c9f6ff;
+    }
+
+    .line {
+      font-size: 1.2rem;
+      margin-top: 20px;
+      line-height: 1.8;
+    }
+
+    /* ================= IMAGE SLIDES ================= */
+    .image-slide::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    }
+
+    .image-slide {
+      animation: zoom 20s linear infinite;
+    }
+
+    @keyframes zoom {
+      from {
+        background-size: 100%;
+      }
+
+      to {
+        background-size: 115%;
+      }
+    }
+
+    /* ================= TAP HINT ================= */
+    .tap {
+      position: absolute;
+      bottom: 30px;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    /* ================= HEARTBEAT ================= */
+    .heartbeat {
+      animation: beat 1.5s infinite;
+    }
+
+    @keyframes beat {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.08);
+      }
+    }
+
+    /* ================= PROPOSAL ================= */
+    .ring {
+      font-size: 3rem;
+      margin-bottom: 15px;
+    }
+
+    /* ================= FIREWORKS CANVAS ================= */
+    canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    /* ================= ROYAL IMAGE FRAME ================= */
+    .royal-frame {
+      padding: 16px;
+      border-radius: 18px;
+      background: linear-gradient(135deg,
+          #d4af37,
+          #fff3b0,
+          #b8962e,
+          #fff3b0,
+          #d4af37);
+      box-shadow:
+        0 0 25px rgba(212, 175, 55, 0.8),
+        inset 0 0 15px rgba(255, 255, 255, 0.6);
+      max-width: 90%;
+      margin: auto;
+    }
+
+    /* ================= IMAGE INSIDE FRAME ================= */
+    .royal-frame img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      object-fit: cover;
+      display: block;
+      animation: slowZoom 18s linear infinite;
+    }
+
+    /* ================= SLOW ZOOM ================= */
+    @keyframes slowZoom {
+      from {
+        transform: scale(1);
+      }
+
+      to {
+        transform: scale(1.08);
+      }
+    }
+
+    /* ================= ROYAL DELUXE FRAME ================= */
+    .royal-frame {
+      position: relative;
+      padding: 18px;
+      border-radius: 22px;
+      background: linear-gradient(135deg,
+          var(--frame1),
+          var(--frame2),
+          var(--frame3),
+          var(--frame2),
+          var(--frame1));
+      box-shadow:
+        0 0 35px rgba(212, 175, 55, 0.9),
+        inset 0 0 20px rgba(255, 255, 255, 0.5);
+      max-width: 88%;
+      margin: auto;
+      animation: floatFrame 6s ease-in-out infinite;
+    }
+
+    /* ================= IMAGE ================= */
+    .royal-frame img {
+      width: 100%;
+      height: auto;
+      border-radius: 14px;
+      display: block;
+      object-fit: cover;
+      animation: slowZoom 20s linear infinite, heartbeatGlow 3s infinite;
+    }
+
+    /* ================= FLOAT ================= */
+    @keyframes floatFrame {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    /* ================= HEARTBEAT GLOW ================= */
+    @keyframes heartbeatGlow {
+
+      0%,
+      100% {
+        box-shadow: 0 0 20px rgba(255, 215, 100, 0.6);
+      }
+
+      50% {
+        box-shadow: 0 0 40px rgba(255, 215, 100, 1);
+      }
+    }
+
+    /* ================= SLOW ZOOM ================= */
+    @keyframes slowZoom {
+      from {
+        transform: scale(1);
+      }
+
+      to {
+        transform: scale(1.1);
+      }
+    }
+
+    /* ================= LIGHT SWEEP ================= */
+    .royal-frame::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 22px;
+      background: linear-gradient(120deg,
+          transparent 30%,
+          rgba(255, 255, 255, 0.6),
+          transparent 70%);
+      animation: sweep 5s infinite;
+      pointer-events: none;
+    }
+
+    @keyframes sweep {
+      from {
+        transform: translateX(-120%);
+      }
+
+      to {
+        transform: translateX(120%);
+      }
+    }
+
+    .slide:nth-child(2) {
+      --frame1: #d4af37;
+      --frame2: #fff1a8;
+      --frame3: #b8962e;
+    }
+
+    .slide:nth-child(3) {
+      --frame1: #9b59b6;
+      --frame2: #e0c3fc;
+      --frame3: #6c3483;
+    }
+
+    .slide:nth-child(4) {
+      --frame1: #3498db;
+      --frame2: #d6ecff;
+      --frame3: #21618c;
+    }
+
+    .slide:nth-child(5) {
+      --frame1: #e84393;
+      --frame2: #ffd1e8;
+      --frame3: #b53471;
+    }
+
+    .slide:nth-child(6) {
+      --frame1: #1abc9c;
+      --frame2: #d1fff3;
+      --frame3: #117a65;
+    }
+
+    /* ================= STYLISH TAP TEXT ================= */
+    /* ================= GOD LEVEL TAP TEXT ================= */
+    .tap-mid {
+      margin-top: 22px;
+      font-family: 'Allura', cursive;
+      font-size: 2.6rem;
+      color: #fff0f6;
+      letter-spacing: 3px;
+      text-align: center;
+
+      text-shadow:
+        0 0 12px rgba(255, 182, 193, 0.9),
+        0 0 28px rgba(255, 105, 180, 1),
+        0 0 60px rgba(232, 67, 147, 1);
+
+      animation: divinePulse 2.8s infinite ease-in-out;
+    }
+
+    @keyframes divinePulse {
+      0% {
+        opacity: 0.55;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.15);
+      }
+
+      100% {
+        opacity: 0.55;
+        transform: scale(1);
+      }
+    }
+
+
+    @keyframes glowTap {
+
+      0%,
+      100% {
+        opacity: 0.6;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.08);
+      }
+    }
+
+    /* ================= WEBSITE BORDER ================= */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 14px;
+      border-radius: 26px;
+
+      border: 3px solid rgba(255, 192, 203, 0.75);
+
+      box-shadow:
+        0 0 25px rgba(255, 105, 180, 0.8),
+        inset 0 0 18px rgba(255, 255, 255, 0.35);
+
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    @media (max-width: 576px) {
+      body::before {
+        inset: 10px;
+        border-radius: 22px;
+      }
+
+      .story-wrapper {
+        height: calc(100vh - 20px);
+        width: calc(100vw - 20px);
+        margin: 10px auto;
+        border-radius: 22px;
+      }
+    }
+
+    /* ================= PERFECT MOBILE STORY LAYOUT ================= */
+
+.slide.image-slide {
+  justify-content: space-between;
+  padding: 18px 16px 24px;
 }
 
-/* ================= STARS BACKGROUND ================= */
-.stars, .stars::after {
-  position: fixed;
-  inset: 0;
-  background: transparent;
-  z-index: -1;
-}
-.stars::after {
-  content: "";
-  background-image: radial-gradient(2px 2px at 20% 30%, #fff, transparent),
-                    radial-gradient(1px 1px at 80% 60%, #fff, transparent),
-                    radial-gradient(1.5px 1.5px at 50% 80%, #fff, transparent),
-                    radial-gradient(1px 1px at 10% 90%, #fff, transparent);
-  animation: starsMove 60s linear infinite;
-}
-@keyframes starsMove {
-  from { transform: translateY(0); }
-  to { transform: translateY(-2000px); }
-}
-
-/* ================= STORY WRAPPER ================= */
-.story-wrapper {
-  height: calc(100vh - 28px);
-  width: calc(100vw - 28px);
-  margin: 14px auto;
-  border-radius: 26px;
-  overflow: hidden;
-}
-
-/* ================= SLIDES ================= */
-.slide {
-  height: 100vh;
-  width: 100vw;
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+/* CAPTION ON TOP */
+.caption-top {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.2rem;
+  color: #fff0f6;
   text-align: center;
-  padding: 20px;
-  background-size: cover;
-  background-position: center;
-  transition: opacity 0.6s ease, transform 0.6s ease;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.slide.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* ================= TEXT ================= */
-.neon {
-  font-family: 'Cinzel Decorative', serif;
-  font-size: 3.1rem;
-  color: #fff;
-  letter-spacing: 4px;
+  line-height: 1.3;
+  margin-top: 12px;
 
   text-shadow:
-    0 0 10px rgba(255,255,255,0.8),
-    0 0 25px rgba(255,192,203,0.9),
+    0 0 10px rgba(255,182,193,0.8),
+    0 0 22px rgba(255,105,180,0.9),
     0 0 45px rgba(232,67,147,1);
 }
 
-
-.sub {
-  font-size: 1.4rem;
-  margin-top: 10px;
-  color: #c9f6ff;
-}
-
-.line {
-  font-size: 1.2rem;
-  margin-top: 20px;
-  line-height: 1.8;
-}
-
-/* ================= IMAGE SLIDES ================= */
-.image-slide::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-}
-
-.image-slide {
-  animation: zoom 20s linear infinite;
-}
-@keyframes zoom {
-  from { background-size: 100%; }
-  to { background-size: 115%; }
-}
-
-/* ================= TAP HINT ================= */
-.tap {
-  position: absolute;
-  bottom: 30px;
-  font-size: 0.9rem;
-  opacity: 0.7;
-}
-
-/* ================= HEARTBEAT ================= */
-.heartbeat {
-  animation: beat 1.5s infinite;
-}
-@keyframes beat {
-  0%,100% { transform: scale(1); }
-  50% { transform: scale(1.08); }
-}
-
-/* ================= PROPOSAL ================= */
-.ring {
-  font-size: 3rem;
-  margin-bottom: 15px;
-}
-
-/* ================= FIREWORKS CANVAS ================= */
-canvas {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-}
-
-/* ================= ROYAL IMAGE FRAME ================= */
+/* IMAGE CENTER CONTROL */
 .royal-frame {
-  padding: 16px;
-  border-radius: 18px;
-  background: linear-gradient(
-    135deg,
-    #d4af37,
-    #fff3b0,
-    #b8962e,
-    #fff3b0,
-    #d4af37
-  );
-  box-shadow:
-    0 0 25px rgba(212,175,55,0.8),
-    inset 0 0 15px rgba(255,255,255,0.6);
-  max-width: 90%;
-  margin: auto;
+  flex-shrink: 0;
+  max-height: 58vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* ================= IMAGE INSIDE FRAME ================= */
 .royal-frame img {
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-  object-fit: cover;
-  display: block;
-  animation: slowZoom 18s linear infinite;
+  max-height: 55vh;
+  width: auto;
 }
 
-/* ================= SLOW ZOOM ================= */
-@keyframes slowZoom {
-  from { transform: scale(1); }
-  to { transform: scale(1.08); }
-}
-
-/* ================= ROYAL DELUXE FRAME ================= */
-.royal-frame {
-  position: relative;
-  padding: 18px;
-  border-radius: 22px;
-  background: linear-gradient(
-    135deg,
-    var(--frame1),
-    var(--frame2),
-    var(--frame3),
-    var(--frame2),
-    var(--frame1)
-  );
-  box-shadow:
-    0 0 35px rgba(212,175,55,0.9),
-    inset 0 0 20px rgba(255,255,255,0.5);
-  max-width: 88%;
-  margin: auto;
-  animation: floatFrame 6s ease-in-out infinite;
-}
-
-/* ================= IMAGE ================= */
-.royal-frame img {
-  width: 100%;
-  height: auto;
-  border-radius: 14px;
-  display: block;
-  object-fit: cover;
-  animation: slowZoom 20s linear infinite, heartbeatGlow 3s infinite;
-}
-
-/* ================= FLOAT ================= */
-@keyframes floatFrame {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-
-/* ================= HEARTBEAT GLOW ================= */
-@keyframes heartbeatGlow {
-  0%,100% { box-shadow: 0 0 20px rgba(255,215,100,0.6); }
-  50% { box-shadow: 0 0 40px rgba(255,215,100,1); }
-}
-
-/* ================= SLOW ZOOM ================= */
-@keyframes slowZoom {
-  from { transform: scale(1); }
-  to { transform: scale(1.1); }
-}
-
-/* ================= LIGHT SWEEP ================= */
-.royal-frame::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 22px;
-  background: linear-gradient(
-    120deg,
-    transparent 30%,
-    rgba(255,255,255,0.6),
-    transparent 70%
-  );
-  animation: sweep 5s infinite;
-  pointer-events: none;
-}
-
-@keyframes sweep {
-  from { transform: translateX(-120%); }
-  to { transform: translateX(120%); }
-}
-
-.slide:nth-child(2) { --frame1:#d4af37; --frame2:#fff1a8; --frame3:#b8962e; }
-.slide:nth-child(3) { --frame1:#9b59b6; --frame2:#e0c3fc; --frame3:#6c3483; }
-.slide:nth-child(4) { --frame1:#3498db; --frame2:#d6ecff; --frame3:#21618c; }
-.slide:nth-child(5) { --frame1:#e84393; --frame2:#ffd1e8; --frame3:#b53471; }
-.slide:nth-child(6) { --frame1:#1abc9c; --frame2:#d1fff3; --frame3:#117a65; }
-
-/* ================= STYLISH TAP TEXT ================= */
-/* ================= GOD LEVEL TAP TEXT ================= */
+/* TAP TEXT BOTTOM */
 .tap-mid {
-  margin-top: 22px;
-  font-family: 'Allura', cursive;
-  font-size: 2.6rem;
-  color: #fff0f6;
-  letter-spacing: 3px;
-  text-align: center;
-
-  text-shadow:
-    0 0 12px rgba(255,182,193,0.9),
-    0 0 28px rgba(255,105,180,1),
-    0 0 60px rgba(232,67,147,1);
-
-  animation: divinePulse 2.8s infinite ease-in-out;
+  margin-top: 12px;
+  margin-bottom: 8px;
 }
 
-@keyframes divinePulse {
-  0% {
-    opacity: 0.55;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.15);
-  }
-  100% {
-    opacity: 0.55;
-    transform: scale(1);
-  }
-}
-
-
-@keyframes glowTap {
-  0%,100% { opacity: 0.6; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.08); }
-}
-
-/* ================= WEBSITE BORDER ================= */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 14px;
-  border-radius: 26px;
-
-  border: 3px solid rgba(255, 192, 203, 0.75);
-
-  box-shadow:
-    0 0 25px rgba(255, 105, 180, 0.8),
-    inset 0 0 18px rgba(255, 255, 255, 0.35);
-
-  pointer-events: none;
-  z-index: 9999;
-}
-
+/* MOBILE SAFETY */
 @media (max-width: 576px) {
-  body::before {
-    inset: 10px;
-    border-radius: 22px;
+  .caption-top {
+    font-size: 1.9rem;
   }
 
-  .story-wrapper {
-    height: calc(100vh - 20px);
-    width: calc(100vw - 20px);
-    margin: 10px auto;
-    border-radius: 22px;
+  .royal-frame {
+    max-height: 52vh;
+  }
+
+  .royal-frame img {
+    max-height: 50vh;
   }
 }
 
-</style>
+  </style>
 </head>
 
 <body>
 
-<div class="stars"></div>
-<canvas id="fireworks"></canvas>
+  <div class="stars"></div>
+  <canvas id="fireworks"></canvas>
 
-<audio id="bgMusic" loop>
-  <source src="music/love.mp3" type="audio/mpeg">
-</audio>
+  <audio id="bgMusic" loop>
+    <source src="music/love.mp3" type="audio/mpeg">
+  </audio>
 
 
-<div class="story-wrapper" id="story">
+  <div class="story-wrapper" id="story">
 
-  <!-- SLIDE 1 -->
-  <section class="slide active">
-    <h1 class="neon">Happy Birthday</h1>
-<h2 class="sub">Shubhangi ❤️</h2>
-<p class="line">
-  Today isn’t just your birthday,<br>
-  it’s the day the universe smiled<br>
-  because <b>you</b> were born.
-</p>
+    <!-- SLIDE 1 -->
+    <section class="slide active">
+      <h1 class="neon">Happy Birthday</h1>
+      <h2 class="sub">Shubhangi ❤️</h2>
+      <p class="line">
+        Today isn’t just your birthday,<br>
+        it’s the day the universe smiled<br>
+        because <b>you</b> were born.
+      </p>
 
-    <div class="tap">tap anywhere 👆</div>
-  </section>
+      <div class="tap">tap anywhere 👆</div>
+    </section>
 
-  
+
     <section class="slide">
-  <div class="royal-frame">
-    <img src="images/1.jpg" alt="memory">
+      <h2 class="sub mt-3">
+        Shubhangi, every smile of yours<br>
+        makes my world softer and brighter
+      </h2>
+      <div class="royal-frame">
+        <img src="images/1.jpg" alt="memory">
+      </div>
+
+      <!-- STYLISH TAP BETWEEN IMAGE & TEXT -->
+      <div class="tap-mid">tap here✨</div>
+
+
+
+    </section>
+
+    <section class="slide">
+      <h2 class="sub mt-3">
+        You don’t just enter a room<br>
+        you change the feeling of it
+      </h2>
+      <div class="royal-frame">
+        <img src="images/2.jpg" alt="memory">
+      </div>
+
+      <!-- STYLISH TAP BETWEEN IMAGE & TEXT -->
+      <div class="tap-mid">tap here✨</div>
+
+
+
+    </section>
+
+    <section class="slide">
+      <h2 class="sub mt-3">
+        Loving you feels calm<br>
+        like my heart finally found home
+      </h2>
+
+      <div class="royal-frame">
+        <img src="images/3.jpg" alt="memory">
+      </div>
+
+      <!-- STYLISH TAP BETWEEN IMAGE & TEXT -->
+      <div class="tap-mid">tap here✨</div>
+
+
+    </section>
+
+    <section class="slide">
+      <h2 class="sub mt-3">
+        Some people are beautiful<br>
+        but you are beautiful <b>and</b> rare
+      </h2>
+
+      <div class="royal-frame">
+        <img src="images/4.jpg" alt="memory">
+      </div>
+
+      <!-- STYLISH TAP BETWEEN IMAGE & TEXT -->
+      <div class="tap-mid">tap here✨</div>
+
+
+    </section>
+
+
+
+    <section class="slide">
+      <h2 class="sub mt-3">
+        Shubhangi, you are not a chapter<br>
+        you are the whole story
+      </h2>
+      <div class="royal-frame">
+        <img src="images/5.jpg" alt="memory">
+      </div>
+
+      <!-- STYLISH TAP BETWEEN IMAGE & TEXT -->
+      <div class="tap-mid">tap here✨</div>
+
+
+
+    </section>
+
+    <section class="slide">
+      <h2 class="sub mt-3">
+        Shubhangi, your presence feels like peace<br>
+        something my heart had been waiting for
+      </h2>
+
+      <div class="royal-frame">
+        <img src="images/6.jpg" alt="memory">
+      </div>
+
+      <!-- STYLISH TAP BETWEEN IMAGE & TEXT -->
+      <div class="tap-mid">tap here✨</div>
+
+
+    </section>
+
+    <section class="slide">
+      <h2 class="sub mt-3">
+        In a world that moves too fast<br>
+        you are the moment I want to stay in
+      </h2>
+      <div class="royal-frame">
+        <img src="images/7.jpg" alt="memory">
+      </div>
+
+      <!-- STYLISH TAP BETWEEN IMAGE & TEXT -->
+      <div class="tap-mid">tap here✨</div>
+
+
+
+    </section>
+
+    <section class="slide">
+      <h2 class="sub mt-3">
+        If my heart could choose once again<br>
+        it would still choose you
+      </h2>
+      <div class="royal-frame">
+        <img src="images/8.jpg" alt="memory">
+      </div>
+
+      <!-- STYLISH TAP BETWEEN IMAGE & TEXT -->
+      <div class="tap-mid">tap here✨</div>
+
+
+
+    </section>
+
+    <!-- SLIDE 6 -->
+    <section class="slide">
+      <p class="line">
+        With you, even silence feels meaningful<br>
+        even ordinary moments feel special<br>
+        and even time feels kinder
+      </p>
+
+      <div class="tap">tap 👆</div>
+    </section>
+
+    <!-- PROPOSAL SLIDE -->
+    <section class="slide">
+      <div class="ring">💍</div>
+      <h1 class="neon heartbeat">Shubhangi</h1>
+      <p class="line">
+        not just today<br>
+        not just now<br>
+        but for every tomorrow
+      </p>
+
+      <div class="tap">tap 👆</div>
+    </section>
+
+    <!-- FINAL -->
+    <section class="slide">
+      <h1 class="neon heartbeat">I Love You</h1>
+      <p class="line">
+        Happy Birthday, Shubhangi<br>
+        my always and forever
+      </p>
+
+    </section>
+
   </div>
 
-  <!-- STYLISH TAP BETWEEN IMAGE & TEXT -->
-  <div class="tap-mid">tap here✨</div>
+  <script>
 
-  <h2 class="sub mt-3">
-  Shubhangi, every smile of yours<br>
-  makes my world softer and brighter
-</h2>
+    const music = document.getElementById("bgMusic");
+    music.volume = 0;
 
-</section>
+    let musicStarted = false;
 
-<section class="slide">
-  <div class="royal-frame">
-    <img src="images/2.jpg" alt="memory">
-  </div>
+    function startMusicWithFade() {
+      if (musicStarted) return;
+      musicStarted = true;
 
-  <!-- STYLISH TAP BETWEEN IMAGE & TEXT -->
-  <div class="tap-mid">tap here✨</div>
+      music.play().catch(() => { });
 
-  <h2 class="sub mt-3">
-  You don’t just enter a room<br>
-  you change the feeling of it
-</h2>
-
-</section>
-
-<section class="slide">
-  <div class="royal-frame">
-    <img src="images/3.jpg" alt="memory">
-  </div>
-
-  <!-- STYLISH TAP BETWEEN IMAGE & TEXT -->
-  <div class="tap-mid">tap here✨</div>
-
-  <h2 class="sub mt-3">
-  Loving you feels calm<br>
-  like my heart finally found home
-</h2>
-
-</section>
-
-<section class="slide">
-  <div class="royal-frame">
-    <img src="images/4.jpg" alt="memory">
-  </div>
-
-  <!-- STYLISH TAP BETWEEN IMAGE & TEXT -->
-  <div class="tap-mid">tap here✨</div>
-
-  <h2 class="sub mt-3">
-  Some people are beautiful<br>
-  but you are beautiful <b>and</b> rare
-</h2>
-
-</section>
-
-
-
-<section class="slide">
-  <div class="royal-frame">
-    <img src="images/5.jpg" alt="memory">
-  </div>
-
-  <!-- STYLISH TAP BETWEEN IMAGE & TEXT -->
-  <div class="tap-mid">tap here✨</div>
-
-  <h2 class="sub mt-3">
-  Shubhangi, you are not a chapter<br>
-  you are the whole story
-</h2>
-
-</section>
-
-<section class="slide">
-  <div class="royal-frame">
-    <img src="images/6.jpg" alt="memory">
-  </div>
-
-  <!-- STYLISH TAP BETWEEN IMAGE & TEXT -->
-  <div class="tap-mid">tap here✨</div>
-
-  <h2 class="sub mt-3">
-  Shubhangi, your presence feels like peace<br>
-  something my heart had been waiting for
-</h2>
-
-</section>
-
-<section class="slide">
-  <div class="royal-frame">
-    <img src="images/7.jpg" alt="memory">
-  </div>
-
-  <!-- STYLISH TAP BETWEEN IMAGE & TEXT -->
-  <div class="tap-mid">tap here✨</div>
-
-  <h2 class="sub mt-3">
-  In a world that moves too fast<br>
-  you are the moment I want to stay in
-</h2>
-
-</section>
-
-<section class="slide">
-  <div class="royal-frame">
-    <img src="images/8.jpg" alt="memory">
-  </div>
-
-  <!-- STYLISH TAP BETWEEN IMAGE & TEXT -->
-  <div class="tap-mid">tap here✨</div>
-
- <h2 class="sub mt-3">
-  If my heart could choose once again<br>
-  it would still choose you
-</h2>
-
-</section>
-
-  <!-- SLIDE 6 -->
-  <section class="slide">
-    <p class="line">
-  With you, even silence feels meaningful<br>
-  even ordinary moments feel special<br>
-  and even time feels kinder
-</p>
-
-    <div class="tap">tap 👆</div>
-  </section>
-
-  <!-- PROPOSAL SLIDE -->
-  <section class="slide">
-    <div class="ring">💍</div>
-   <h1 class="neon heartbeat">Shubhangi</h1>
-<p class="line">
-  not just today<br>
-  not just now<br>
-  but for every tomorrow
-</p>
-
-    <div class="tap">tap 👆</div>
-  </section>
-
-  <!-- FINAL -->
-  <section class="slide">
-   <h1 class="neon heartbeat">I Love You</h1>
-<p class="line">
-  Happy Birthday, Shubhangi<br>
-  my always and forever
-</p>
-
-  </section>
-
-</div>
-
-<script>
-
-const music = document.getElementById("bgMusic");
-music.volume = 0;
-
-let musicStarted = false;
-
-function startMusicWithFade() {
-  if (musicStarted) return;
-  musicStarted = true;
-
-  music.play().catch(() => {});
-
-  let vol = 0;
-  const fade = setInterval(() => {
-    if (vol < 0.8) {
-      vol += 0.02;
-      music.volume = vol;
-    } else {
-      clearInterval(fade);
+      let vol = 0;
+      const fade = setInterval(() => {
+        if (vol < 0.8) {
+          vol += 0.02;
+          music.volume = vol;
+        } else {
+          clearInterval(fade);
+        }
+      }, 200);
     }
-  }, 200);
-}
 
-/* START MUSIC ON FIRST TAP */
-document.body.addEventListener("click", startMusicWithFade, { once: true });
-document.body.addEventListener("touchstart", startMusicWithFade, { once: true });
+    /* START MUSIC ON FIRST TAP */
+    document.body.addEventListener("click", startMusicWithFade, { once: true });
+    document.body.addEventListener("touchstart", startMusicWithFade, { once: true });
 
 
-/* ================= TAP TO CONTINUE ================= */
-const slides = document.querySelectorAll(".slide");
-let current = 0;
+    /* ================= TAP TO CONTINUE ================= */
+    const slides = document.querySelectorAll(".slide");
+    let current = 0;
 
-document.body.addEventListener("click", () => {
-  if (current < slides.length - 1) {
-    slides[current].classList.remove("active");
-    current++;
-    slides[current].classList.add("active");
+    document.body.addEventListener("click", () => {
+      if (current < slides.length - 1) {
+        slides[current].classList.remove("active");
+        current++;
+        slides[current].classList.add("active");
 
-    if (current === slides.length - 1) startFireworks();
-  }
-});
+        if (current === slides.length - 1) startFireworks();
+      }
+    });
 
-/* ================= FIREWORKS ================= */
-const canvas = document.getElementById("fireworks");
-const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+    /* ================= FIREWORKS ================= */
+    const canvas = document.getElementById("fireworks");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-let particles = [];
+    let particles = [];
 
-function startFireworks() {
-  setInterval(() => {
-    for (let i = 0; i < 80; i++) {
-      particles.push({
-        x: canvas.width / 2,
-        y: canvas.height / 2,
-        vx: (Math.random() - 0.5) * 8,
-        vy: (Math.random() - 0.5) * 8,
-        life: 100
+    function startFireworks() {
+      setInterval(() => {
+        for (let i = 0; i < 80; i++) {
+          particles.push({
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+            vx: (Math.random() - 0.5) * 8,
+            vy: (Math.random() - 0.5) * 8,
+            life: 100
+          });
+        }
+      }, 800);
+    }
+
+    function animateFireworks() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((p, i) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life--;
+        ctx.fillStyle = "rgba(0,234,255,0.8)";
+        ctx.fillRect(p.x, p.y, 3, 3);
+        if (p.life <= 0) particles.splice(i, 1);
       });
+      requestAnimationFrame(animateFireworks);
     }
-  }, 800);
-}
+    animateFireworks();
 
-function animateFireworks() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  particles.forEach((p, i) => {
-    p.x += p.vx;
-    p.y += p.vy;
-    p.life--;
-    ctx.fillStyle = "rgba(0,234,255,0.8)";
-    ctx.fillRect(p.x, p.y, 3, 3);
-    if (p.life <= 0) particles.splice(i, 1);
-  });
-  requestAnimationFrame(animateFireworks);
-}
-animateFireworks();
+    /* ================= SWIPE SUPPORT ================= */
+    let startX = 0;
 
-/* ================= SWIPE SUPPORT ================= */
-let startX = 0;
+    document.addEventListener("touchstart", e => {
+      startX = e.touches[0].clientX;
+    });
 
-document.addEventListener("touchstart", e => {
-  startX = e.touches[0].clientX;
-});
+    document.addEventListener("touchend", e => {
+      let endX = e.changedTouches[0].clientX;
+      if (startX - endX > 50) goNext();
+    });
 
-document.addEventListener("touchend", e => {
-  let endX = e.changedTouches[0].clientX;
-  if (startX - endX > 50) goNext();
-});
+    function goNext() {
+      if (current < slides.length - 1) {
+        slides[current].classList.remove("active");
+        current++;
+        slides[current].classList.add("active");
 
-function goNext() {
-  if (current < slides.length - 1) {
-    slides[current].classList.remove("active");
-    current++;
-    slides[current].classList.add("active");
+        if (current === slides.length - 1) startFireworks();
+      }
+    }
 
-    if (current === slides.length - 1) startFireworks();
-  }
-}
-
-</script>
+  </script>
 
 </body>
+
 </html>
